@@ -4,6 +4,7 @@ set -e
 INPUT_BRANCH=${INPUT_BRANCH:-master}
 INPUT_FORCE=${INPUT_FORCE:-false}
 INPUT_DIRECTORY=${INPUT_DIRECTORY:-'.'}
+INPUT_PULL=${INPUT_PULL:-false}
 _FORCE_OPTION=''
 REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
 
@@ -21,4 +22,8 @@ cd ${INPUT_DIRECTORY}
 
 remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
 
+if ${INPUT_PULL}; then
+    echo "Pull from branch $INPUT_BRANCH before pushing";
+    git pull "${remote_repo}" HEAD:${INPUT_BRANCH} --allow-unrelated-histories;
+fi
 git push "${remote_repo}" HEAD:${INPUT_BRANCH} --follow-tags $_FORCE_OPTION;

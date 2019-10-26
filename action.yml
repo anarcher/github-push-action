@@ -23,6 +23,10 @@ inputs:
     description: 'Directory to change to before pushing.'
     required: false
     default: '.'
+  pull:
+    description: "Pulling before pushing."
+    required: false
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
