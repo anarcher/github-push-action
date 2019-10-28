@@ -24,6 +24,8 @@ remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITO
 
 if ${INPUT_PULL}; then
     echo "Pull from branch $INPUT_BRANCH before pushing";
-    git pull "${remote_repo}" HEAD:${INPUT_BRANCH} --allow-unrelated-histories;
+    git config --global user.email "github-action@example.com"
+    git config --global user.name "github-action"
+    git pull "${remote_repo}" ${INPUT_BRANCH} --allow-unrelated-histories;
 fi
 git push "${remote_repo}" HEAD:${INPUT_BRANCH} --follow-tags $_FORCE_OPTION;
