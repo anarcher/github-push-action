@@ -29,4 +29,4 @@ inputs:
     default: false
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://anarcher/github-push-action:v2.0.0'
